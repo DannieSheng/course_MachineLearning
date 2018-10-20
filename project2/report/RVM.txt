@@ -1,0 +1,31 @@
+RVM Binary Classifier document:
+
+There are two main functions: TrainRVM.m and TestRVM.m for training and testing, respectively.
+
+[EstParameters, Parameters] = TrainRVM(XEstimate, ClassLabels, Parameters)
+% Input:
+%       XEstimate: N x D training data
+%       ClassLabels: N x 1 vector with labels for each training data
+%       Parameters: Structure variable with Kernel type(str); BasisWidth(double); Iterations(int)
+%
+% Output:
+%       EstParameters: Structure variable. EstParameters.Parameters saved estimated relevant basis and
+%       		weights. EstParameters.HyperParameters saved the alpha and beta for the model.
+%       Parameters: The same as input parameters. Saved for the test.
+
+Note: 1. The input variable 'Parameter' is generated from the funcion 'loadParameters.m'. 
+      2. The default kernel function is Gaussian. You can change in the funcion 'loadParameters.m' when you generate the Parameters.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+[YTest] = TestRVM(XTest, Parameters, EstParameters)
+% Input:
+%       XTest: N x D test data
+%       Parameters: Structure variable with Kernel type(str); BasisWidth(double); Iterations(int)
+%       EstParameters: structure variable. Estimated parameters from training. 
+%
+% Output:
+%      Ytest: N x 1 vector. The estimated labels fot each test data.
+
+Note: 1. The second input 'Parameters' is the same as the 'Parameters' in function TrainRVM.m. It is generated from  the funcion 
+         'loadParameters.m'. Those are the constant parameters instead of learned hyper-parameters.
+      2. The third input 'EstParameters' contains the learned hyper-parameters for the model including relevant vectors and their values.  
